@@ -16,6 +16,7 @@ import { Route as EventsRouteImport } from './routes/events'
 import { Route as InsightsRouteImport } from './routes/insights'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as RolesRouteImport } from './routes/roles'
 import { Route as SignalProcessingRouteImport } from './routes/signal-processing'
 
 const IndexRoute = IndexRouteImport.update({
@@ -53,6 +54,11 @@ const ReportsRoute = ReportsRouteImport.update({
   path: '/reports',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RolesRoute = RolesRouteImport.update({
+  id: '/roles',
+  path: '/roles',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignalProcessingRoute = SignalProcessingRouteImport.update({
   id: '/signal-processing',
   path: '/signal-processing',
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/insights': typeof InsightsRoute
   '/privacy': typeof PrivacyRoute
   '/reports': typeof ReportsRoute
+  '/roles': typeof RolesRoute
   '/signal-processing': typeof SignalProcessingRoute
 }
 export interface FileRoutesByTo {
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/insights': typeof InsightsRoute
   '/privacy': typeof PrivacyRoute
   '/reports': typeof ReportsRoute
+  '/roles': typeof RolesRoute
   '/signal-processing': typeof SignalProcessingRoute
 }
 export interface FileRoutesById {
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/insights': typeof InsightsRoute
   '/privacy': typeof PrivacyRoute
   '/reports': typeof ReportsRoute
+  '/roles': typeof RolesRoute
   '/signal-processing': typeof SignalProcessingRoute
 }
 export interface FileRouteTypes {
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/insights'
     | '/privacy'
     | '/reports'
+    | '/roles'
     | '/signal-processing'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/insights'
     | '/privacy'
     | '/reports'
+    | '/roles'
     | '/signal-processing'
   id:
     | '__root__'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/insights'
     | '/privacy'
     | '/reports'
+    | '/roles'
     | '/signal-processing'
   fileRoutesById: FileRoutesById
 }
@@ -131,6 +143,7 @@ export interface RootRouteChildren {
   InsightsRoute: typeof InsightsRoute
   PrivacyRoute: typeof PrivacyRoute
   ReportsRoute: typeof ReportsRoute
+  RolesRoute: typeof RolesRoute
   SignalProcessingRoute: typeof SignalProcessingRoute
 }
 
@@ -185,6 +198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReportsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/roles': {
+      id: '/roles'
+      path: '/roles'
+      fullPath: '/roles'
+      preLoaderRoute: typeof RolesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signal-processing': {
       id: '/signal-processing'
       path: '/signal-processing'
@@ -203,6 +223,7 @@ const rootRouteChildren: RootRouteChildren = {
   InsightsRoute: InsightsRoute,
   PrivacyRoute: PrivacyRoute,
   ReportsRoute: ReportsRoute,
+  RolesRoute: RolesRoute,
   SignalProcessingRoute: SignalProcessingRoute,
 }
 export const routeTree = rootRouteImport
