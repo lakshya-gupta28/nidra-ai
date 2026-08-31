@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Info, Sparkles, TrendingUp, TriangleAlert } from "lucide-react";
 import { AppShell } from "@/components/nidra/AppShell";
@@ -62,7 +63,7 @@ function Insights() {
         ].map(([title, chart]) => (
           <section key={title as string} className="rounded-2xl border border-border bg-card p-6 shadow-card">
             <h3 className="mb-4 font-semibold">{title as string}</h3>
-            {chart as React.ReactNode}
+            {chart as ReactNode}
           </section>
         ))}
       </div>

@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AiAnalysisRouteImport } from './routes/ai-analysis'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as InsightsRouteImport } from './routes/insights'
 import { Route as SignalProcessingRouteImport } from './routes/signal-processing'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InsightsRoute = InsightsRouteImport.update({
+  id: '/insights',
+  path: '/insights',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignalProcessingRoute = SignalProcessingRouteImport.update({
   id: '/signal-processing',
   path: '/signal-processing',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ai-analysis': typeof AiAnalysisRoute
   '/dashboard': typeof DashboardRoute
+  '/insights': typeof InsightsRoute
   '/signal-processing': typeof SignalProcessingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ai-analysis': typeof AiAnalysisRoute
   '/dashboard': typeof DashboardRoute
+  '/insights': typeof InsightsRoute
   '/signal-processing': typeof SignalProcessingRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,29 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/ai-analysis': typeof AiAnalysisRoute
   '/dashboard': typeof DashboardRoute
+  '/insights': typeof InsightsRoute
   '/signal-processing': typeof SignalProcessingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/ai-analysis' | '/dashboard' | '/signal-processing'
+  fullPaths:
+    '/' | '/ai-analysis' | '/dashboard' | '/insights' | '/signal-processing'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/ai-analysis' | '/dashboard' | '/signal-processing'
-  id: '__root__' | '/' | '/ai-analysis' | '/dashboard' | '/signal-processing'
+  to: '/' | '/ai-analysis' | '/dashboard' | '/insights' | '/signal-processing'
+  id:
+    | '__root__'
+    | '/'
+    | '/ai-analysis'
+    | '/dashboard'
+    | '/insights'
+    | '/signal-processing'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AiAnalysisRoute: typeof AiAnalysisRoute
   DashboardRoute: typeof DashboardRoute
+  InsightsRoute: typeof InsightsRoute
   SignalProcessingRoute: typeof SignalProcessingRoute
 }
 
@@ -92,6 +109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/insights': {
+      id: '/insights'
+      path: '/insights'
+      fullPath: '/insights'
+      preLoaderRoute: typeof InsightsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signal-processing': {
       id: '/signal-processing'
       path: '/signal-processing'
@@ -106,6 +130,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AiAnalysisRoute: AiAnalysisRoute,
   DashboardRoute: DashboardRoute,
+  InsightsRoute: InsightsRoute,
   SignalProcessingRoute: SignalProcessingRoute,
 }
 export const routeTree = rootRouteImport
