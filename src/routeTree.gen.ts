@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AiAnalysisRouteImport } from './routes/ai-analysis'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as EventsRouteImport } from './routes/events'
 import { Route as InsightsRouteImport } from './routes/insights'
 import { Route as SignalProcessingRouteImport } from './routes/signal-processing'
 
@@ -30,6 +31,11 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const InsightsRoute = InsightsRouteImport.update({
   id: '/insights',
   path: '/insights',
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ai-analysis': typeof AiAnalysisRoute
   '/dashboard': typeof DashboardRoute
+  '/events': typeof EventsRoute
   '/insights': typeof InsightsRoute
   '/signal-processing': typeof SignalProcessingRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ai-analysis': typeof AiAnalysisRoute
   '/dashboard': typeof DashboardRoute
+  '/events': typeof EventsRoute
   '/insights': typeof InsightsRoute
   '/signal-processing': typeof SignalProcessingRoute
 }
@@ -60,20 +68,33 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/ai-analysis': typeof AiAnalysisRoute
   '/dashboard': typeof DashboardRoute
+  '/events': typeof EventsRoute
   '/insights': typeof InsightsRoute
   '/signal-processing': typeof SignalProcessingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/ai-analysis' | '/dashboard' | '/insights' | '/signal-processing'
+    | '/'
+    | '/ai-analysis'
+    | '/dashboard'
+    | '/events'
+    | '/insights'
+    | '/signal-processing'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/ai-analysis' | '/dashboard' | '/insights' | '/signal-processing'
+  to:
+    | '/'
+    | '/ai-analysis'
+    | '/dashboard'
+    | '/events'
+    | '/insights'
+    | '/signal-processing'
   id:
     | '__root__'
     | '/'
     | '/ai-analysis'
     | '/dashboard'
+    | '/events'
     | '/insights'
     | '/signal-processing'
   fileRoutesById: FileRoutesById
@@ -82,6 +103,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AiAnalysisRoute: typeof AiAnalysisRoute
   DashboardRoute: typeof DashboardRoute
+  EventsRoute: typeof EventsRoute
   InsightsRoute: typeof InsightsRoute
   SignalProcessingRoute: typeof SignalProcessingRoute
 }
@@ -109,6 +131,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/insights': {
       id: '/insights'
       path: '/insights'
@@ -130,6 +159,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AiAnalysisRoute: AiAnalysisRoute,
   DashboardRoute: DashboardRoute,
+  EventsRoute: EventsRoute,
   InsightsRoute: InsightsRoute,
   SignalProcessingRoute: SignalProcessingRoute,
 }
