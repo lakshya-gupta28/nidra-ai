@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AiAnalysisRouteImport } from './routes/ai-analysis'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as SignalProcessingRouteImport } from './routes/signal-processing'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiAnalysisRoute = AiAnalysisRouteImport.update({
+  id: '/ai-analysis',
+  path: '/ai-analysis',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -31,30 +37,34 @@ const SignalProcessingRoute = SignalProcessingRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ai-analysis': typeof AiAnalysisRoute
   '/dashboard': typeof DashboardRoute
   '/signal-processing': typeof SignalProcessingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ai-analysis': typeof AiAnalysisRoute
   '/dashboard': typeof DashboardRoute
   '/signal-processing': typeof SignalProcessingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ai-analysis': typeof AiAnalysisRoute
   '/dashboard': typeof DashboardRoute
   '/signal-processing': typeof SignalProcessingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/signal-processing'
+  fullPaths: '/' | '/ai-analysis' | '/dashboard' | '/signal-processing'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/signal-processing'
-  id: '__root__' | '/' | '/dashboard' | '/signal-processing'
+  to: '/' | '/ai-analysis' | '/dashboard' | '/signal-processing'
+  id: '__root__' | '/' | '/ai-analysis' | '/dashboard' | '/signal-processing'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AiAnalysisRoute: typeof AiAnalysisRoute
   DashboardRoute: typeof DashboardRoute
   SignalProcessingRoute: typeof SignalProcessingRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-analysis': {
+      id: '/ai-analysis'
+      path: '/ai-analysis'
+      fullPath: '/ai-analysis'
+      preLoaderRoute: typeof AiAnalysisRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AiAnalysisRoute: AiAnalysisRoute,
   DashboardRoute: DashboardRoute,
   SignalProcessingRoute: SignalProcessingRoute,
 }
