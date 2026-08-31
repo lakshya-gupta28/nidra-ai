@@ -14,6 +14,7 @@ import { Route as AiAnalysisRouteImport } from './routes/ai-analysis'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as InsightsRouteImport } from './routes/insights'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as SignalProcessingRouteImport } from './routes/signal-processing'
 
@@ -42,6 +43,11 @@ const InsightsRoute = InsightsRouteImport.update({
   path: '/insights',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReportsRoute = ReportsRouteImport.update({
   id: '/reports',
   path: '/reports',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/events': typeof EventsRoute
   '/insights': typeof InsightsRoute
+  '/privacy': typeof PrivacyRoute
   '/reports': typeof ReportsRoute
   '/signal-processing': typeof SignalProcessingRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/events': typeof EventsRoute
   '/insights': typeof InsightsRoute
+  '/privacy': typeof PrivacyRoute
   '/reports': typeof ReportsRoute
   '/signal-processing': typeof SignalProcessingRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/events': typeof EventsRoute
   '/insights': typeof InsightsRoute
+  '/privacy': typeof PrivacyRoute
   '/reports': typeof ReportsRoute
   '/signal-processing': typeof SignalProcessingRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/events'
     | '/insights'
+    | '/privacy'
     | '/reports'
     | '/signal-processing'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/events'
     | '/insights'
+    | '/privacy'
     | '/reports'
     | '/signal-processing'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/events'
     | '/insights'
+    | '/privacy'
     | '/reports'
     | '/signal-processing'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   EventsRoute: typeof EventsRoute
   InsightsRoute: typeof InsightsRoute
+  PrivacyRoute: typeof PrivacyRoute
   ReportsRoute: typeof ReportsRoute
   SignalProcessingRoute: typeof SignalProcessingRoute
 }
@@ -158,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InsightsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reports': {
       id: '/reports'
       path: '/reports'
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   EventsRoute: EventsRoute,
   InsightsRoute: InsightsRoute,
+  PrivacyRoute: PrivacyRoute,
   ReportsRoute: ReportsRoute,
   SignalProcessingRoute: SignalProcessingRoute,
 }
