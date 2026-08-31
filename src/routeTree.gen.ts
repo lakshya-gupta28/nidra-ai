@@ -14,6 +14,7 @@ import { Route as AiAnalysisRouteImport } from './routes/ai-analysis'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as InsightsRouteImport } from './routes/insights'
+import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as SignalProcessingRouteImport } from './routes/signal-processing'
 
 const IndexRoute = IndexRouteImport.update({
@@ -41,6 +42,11 @@ const InsightsRoute = InsightsRouteImport.update({
   path: '/insights',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignalProcessingRoute = SignalProcessingRouteImport.update({
   id: '/signal-processing',
   path: '/signal-processing',
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/events': typeof EventsRoute
   '/insights': typeof InsightsRoute
+  '/reports': typeof ReportsRoute
   '/signal-processing': typeof SignalProcessingRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/events': typeof EventsRoute
   '/insights': typeof InsightsRoute
+  '/reports': typeof ReportsRoute
   '/signal-processing': typeof SignalProcessingRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/events': typeof EventsRoute
   '/insights': typeof InsightsRoute
+  '/reports': typeof ReportsRoute
   '/signal-processing': typeof SignalProcessingRoute
 }
 export interface FileRouteTypes {
@@ -80,6 +89,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/events'
     | '/insights'
+    | '/reports'
     | '/signal-processing'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -88,6 +98,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/events'
     | '/insights'
+    | '/reports'
     | '/signal-processing'
   id:
     | '__root__'
@@ -96,6 +107,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/events'
     | '/insights'
+    | '/reports'
     | '/signal-processing'
   fileRoutesById: FileRoutesById
 }
@@ -105,6 +117,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   EventsRoute: typeof EventsRoute
   InsightsRoute: typeof InsightsRoute
+  ReportsRoute: typeof ReportsRoute
   SignalProcessingRoute: typeof SignalProcessingRoute
 }
 
@@ -145,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InsightsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signal-processing': {
       id: '/signal-processing'
       path: '/signal-processing'
@@ -161,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   EventsRoute: EventsRoute,
   InsightsRoute: InsightsRoute,
+  ReportsRoute: ReportsRoute,
   SignalProcessingRoute: SignalProcessingRoute,
 }
 export const routeTree = rootRouteImport
