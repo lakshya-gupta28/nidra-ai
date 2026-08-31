@@ -24,7 +24,7 @@ export const Route = createFileRoute("/insights")({
       },
     ],
   }),
-  component: Insights;
+  component: Insights,
 });
 
 const TONE = {
